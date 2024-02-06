@@ -14,10 +14,10 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        AuthUser::created([
+        User::create([
             'name' => 'Jhan Pool Agudelo',
-            'name' => 'jhan@jhan.jhan',
-            'name' => bcrypt('12345678'),
+            'email' => 'jhan@jhan.jhan',
+            'password' => bcrypt('12345678'),
         ]);
 
         User::factory(99)->create();
