@@ -9,6 +9,13 @@ class Tag extends Model
 {
     use HasFactory;
 
+    protected $fillable =['name', 'slug'];
+
+    public function getRouteKeyName()
+    {
+        return "slug";
+    }
+
     //Relacion de muchos a muchos
     public function posts(){
         return $this->belongsToMany(Post::class);
