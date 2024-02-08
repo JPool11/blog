@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
+        $this->call(RolSeeder::class);
+
         $this->call(UserSeeder::class);
 
         Category::factory(4)->create();
