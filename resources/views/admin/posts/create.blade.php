@@ -9,7 +9,7 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            {!! Form::open(['route' => 'admin.posts.store', 'autocomplete' => 'off']) !!}
+            {!! Form::open(['route' => 'admin.posts.store', 'autocomplete' => 'off', 'files' => true]) !!}
 
                 {!! Form::hidden('user_id', auth()->user()->id) !!}
 
@@ -87,6 +87,27 @@
                     @enderror
                 </div>
 
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="image-grapper">
+                            <img id="picture" src="https://cdn.pixabay.com/photo/2024/01/08/15/54/defile-8495836_1280.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            {!! Form::label('file', 'Imagen para tu post') !!}
+                            {!! Form::file('file', ['class' => 'form-control-file', 'accept' => 'image/*']) !!}
+
+                            @error('file')
+                                <small class="text-danger">
+                                    {{$message}}
+                                </small>
+                            @enderror
+                        </div>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente numquam molestiae accusamus consequatur nulla blanditiis incidunt, explicabo eos libero repudiandae maxime mollitia veniam maiores architecto molestias repellat assumenda? Cupiditate, natus.</p>
+                    </div>
+                </div>
+
                 <div class="form-group">
                     {!! Form::label('extract', 'Extracto') !!}
                     {!! Form::textarea('extract', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el extract del post']) !!}
@@ -116,7 +137,19 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+    <style>
+        .image-grapper{
+            position: relative;
+            padding-bottom: 56.25%;
+        }
+
+        .image-grapper img{
+            position: absolute;
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
 @stop
 
 @section('js')
@@ -143,5 +176,19 @@
         .catch( error => {
             console.error( error );
         } );
+
+        // Cambiar imagen
+        document.getElementById("file").addEventListener('change', cambiarImagen);
+
+        function cambiarImagen(event){
+            var file = event.target.files[0];
+
+            var reader = new FileReader();
+            reader.onload= (event)=>{
+                document.getElementById("picture").setAttribute('src', event.target.result)
+            };
+
+            reader.readAsDataURL(file);
+        }
     </script>
 @endsection
