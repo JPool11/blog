@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        <input wire:model="search" class="form-control" placeholder="Ingrese el nombre de un post">
+        <input wire:model.live="search" class="form-control" placeholder="Ingrese el nombre de un post">
     </div>
     @if ($posts->count())
         <div class="card-body">
